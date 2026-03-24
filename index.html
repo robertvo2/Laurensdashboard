@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🐴 Lauren's Paarden Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Floating horse shoes decoration -->
+  <div class="floaties" id="floaties"></div>
+
+  <header>
+    <div class="header-left">
+      <div class="logo">🐴</div>
+      <div>
+        <h1>Lauren's Dashboard</h1>
+        <p class="subtitle">Manage De Vossenmeren ✨</p>
+      </div>
+    </div>
+    <div class="clock-box">
+      <div id="time" class="time">00:00:00</div>
+      <div id="date" class="date">maandag 1 januari 2026</div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Row 1 -->
+    <div class="grid grid-3">
+
+      <!-- Vakantie afteller -->
+      <div class="card card-holiday">
+        <div class="card-icon">🏖️</div>
+        <h2>Volgende Vakantie</h2>
+        <div id="holiday-name" class="holiday-name">Meivakantie</div>
+        <div class="countdown" id="countdown">
+          <div class="cd-block"><span id="cd-days">--</span><small>dagen</small></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-block"><span id="cd-hours">--</span><small>uren</small></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-block"><span id="cd-mins">--</span><small>min</small></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-block"><span id="cd-secs">--</span><small>sec</small></div>
+        </div>
+        <div id="holiday-date" class="holiday-date-label">25 april t/m 10 mei 2026</div>
+      </div>
+
+      <!-- Paard van de dag -->
+      <div class="card card-horse-fact">
+        <div class="card-icon">🌟</div>
+        <h2>Paarden Feit van de Dag</h2>
+        <div id="horse-fact" class="fact-text">Laden...</div>
+        <button class="btn-fun" onclick="newFact()">Nieuw feit! 🎲</button>
+      </div>
+
+      <!-- Weer widget -->
+      <div class="card card-weather">
+        <div class="card-icon">🌤️</div>
+        <h2>Weer in Ter Aar</h2>
+        <div id="weather-content" class="weather-content">
+          <div class="weather-main">
+            <span id="weather-icon" class="weather-big-icon">⛅</span>
+            <div>
+              <div id="weather-temp" class="weather-temp">--°C</div>
+              <div id="weather-desc" class="weather-desc">Laden...</div>
+            </div>
+          </div>
+          <div class="weather-details">
+            <div>💧 Neerslag: <span id="weather-rain">--%</span></div>
+            <div>💨 Wind: <span id="weather-wind">-- km/h</span></div>
+          </div>
+          <div id="weather-riding" class="weather-riding"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Row 2 -->
+    <div class="grid grid-2">
+
+      <!-- Paarden nieuws -->
+      <div class="card card-news">
+        <div class="card-icon">📰</div>
+        <h2>Paarden Nieuws</h2>
+        <div id="news-tabs" class="news-tabs">
+          <button class="tab-btn active" onclick="switchTab('hoefslag')">Hoefslag</button>
+          <button class="tab-btn" onclick="switchTab('horses')">Horses.nl</button>
+          <button class="tab-btn" onclick="switchTab('knhs')">KNHS</button>
+        </div>
+        <div id="news-list" class="news-list">
+          <div class="loading-dots"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+
+      <!-- Mijn manage & Vossenmeren -->
+      <div class="card card-manage">
+        <div class="card-icon">🏇</div>
+        <h2>Manage De Vossenmeren</h2>
+        <div class="manage-content">
+          <div class="manage-banner">
+            <div class="horse-running" id="horseRunner">🐎</div>
+          </div>
+          <div class="manage-links">
+            <a href="https://www.vossenmeren.nl" target="_blank" class="manage-link">
+              🌐 Website
+            </a>
+            <a href="https://www.vossenmeren.nl/agenda" target="_blank" class="manage-link">
+              📅 Agenda
+            </a>
+            <a href="https://www.vossenmeren.nl/nieuws" target="_blank" class="manage-link">
+              📣 Nieuws
+            </a>
+          </div>
+          <div class="lesson-reminder" id="lesson-reminder">
+            <div class="lesson-title">🎽 Volgende Les</div>
+            <div id="next-lesson">Woensdag om 16:00 🐴</div>
+          </div>
+          <div class="fun-quote" id="fun-quote">
+            "Een dag zonder paard rijden is een dag niet geleefd!"
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Row 3 -->
+    <div class="grid grid-3">
+
+      <!-- Paard spel -->
+      <div class="card card-game">
+        <div class="card-icon">🎮</div>
+        <h2>Paard Quiz!</h2>
+        <div id="quiz-content">
+          <div id="quiz-question" class="quiz-question">Laden...</div>
+          <div id="quiz-options" class="quiz-options"></div>
+          <div id="quiz-result" class="quiz-result"></div>
+          <div class="quiz-score">Score: <span id="quiz-score">0</span> ⭐</div>
+        </div>
+      </div>
+
+      <!-- YouTube kanalen -->
+      <div class="card card-youtube">
+        <div class="card-icon">▶️</div>
+        <h2>Paarden Videos</h2>
+        <div class="youtube-links">
+          <a href="https://www.youtube.com/results?search_query=paarden+rijden+kinderen" target="_blank" class="yt-link">
+            🎠 Paard rijden voor kids
+          </a>
+          <a href="https://www.youtube.com/results?search_query=horse+care+for+kids" target="_blank" class="yt-link">
+            🧡 Paard verzorgen
+          </a>
+          <a href="https://www.youtube.com/results?search_query=equestrian+olympics+2024" target="_blank" class="yt-link">
+            🏅 Olympische ruitersport
+          </a>
+          <a href="https://www.youtube.com/results?search_query=KNHS+jeugd+paardrijden" target="_blank" class="yt-link">
+            🇳🇱 KNHS Jeugd
+          </a>
+          <a href="https://www.youtube.com/results?search_query=grappige+paarden+videos" target="_blank" class="yt-link">
+            😂 Grappige paarden
+          </a>
+        </div>
+      </div>
+
+      <!-- Paarden breed info -->
+      <div class="card card-breed">
+        <div class="card-icon">🦄</div>
+        <h2>Paardenras van de Dag</h2>
+        <div id="breed-content" class="breed-content">
+          <div id="breed-name" class="breed-name">Fries Paard</div>
+          <div id="breed-emoji" class="breed-emoji">🐴</div>
+          <div id="breed-info" class="breed-info">Laden...</div>
+          <button class="btn-fun" onclick="newBreed()">Volgend ras! 🎲</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Row 4: Schoolvakantie kalender -->
+    <div class="grid grid-1">
+      <div class="card card-calendar">
+        <div class="card-icon">📆</div>
+        <h2>Schoolvakanties 2025-2026 — School de Vaart, Ter Aar</h2>
+        <div class="holidays-grid" id="holidays-grid"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>🐴 Gemaakt met ❤️ voor Lauren • Manage De Vossenmeren • School de Vaart, Ter Aar 🐴</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
