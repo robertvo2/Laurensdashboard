@@ -33,6 +33,28 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
+// ===== AUTO-REFRESH / RESYNC =====
+// Op een Home Assistant kiosk/tablet of in een achtergrond-tab knijpt de browser
+// setInterval-timers af (of pauzeert ze) tijdens slaapstand. Daardoor blijft de
+// klok hangen tot je handmatig ververst. We synchroniseren daarom alles opnieuw
+// zodra de pagina weer zichtbaar/actief wordt, plus periodiek als vangnet.
+function resyncDashboard() {
+  updateClock();
+  updateCountdown();
+  renderHolidayCalendar();
+  fetchWeather();
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') resyncDashboard();
+});
+window.addEventListener('focus', resyncDashboard);
+window.addEventListener('pageshow', resyncDashboard);
+
+// Vangnet: dwing elke minuut een volledige resync af, zodat de tijd ook bij
+// langdurig afgeknepen timers nooit ver wegloopt.
+setInterval(resyncDashboard, 60000);
+
 // ===== SCHOOL HOLIDAYS — School de Vaart, Ter Aar (Zuid-Holland) =====
 // Official Dutch school holidays for region Zuid-Holland 2025-2026
 const HOLIDAYS = [
